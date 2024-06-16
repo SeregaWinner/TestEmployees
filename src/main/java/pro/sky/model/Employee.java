@@ -1,7 +1,6 @@
 package pro.sky.model;
 
 import java.util.Objects;
-import java.util.Random;
 
 import static org.apache.tomcat.util.IntrospectionUtils.capitalize;
 
@@ -12,13 +11,11 @@ public class Employee {
     private int department;
     private int salary;
 
-
-    public Employee(String firstName, String lastName) {
-        Random random = new Random();
+    public Employee(String firstName, String lastName, int department, int salary) {
         this.firstName = capitalize(firstName.toLowerCase());
         this.lastName = capitalize(lastName.toLowerCase());
-        this.salary = random.nextInt(100000) + 10000;
-        this.department = random.nextInt(5) + 1;
+        this.department = department;
+        this.salary = salary;
     }
 
     public Employee() {
@@ -40,7 +37,7 @@ public class Employee {
         return department;
     }
 
-    public double getSalary() {
+    public int getSalary() {
         return salary;
     }
 
@@ -71,5 +68,15 @@ public class Employee {
     @Override
     public int hashCode() {
         return Objects.hash(getFirstName(), getLastName());
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", department=" + department +
+                ", salary=" + salary +
+                '}';
     }
 }

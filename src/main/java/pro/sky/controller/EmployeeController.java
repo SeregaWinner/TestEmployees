@@ -5,23 +5,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.model.Employee;
-import pro.sky.service.EmployeeService;
+import pro.sky.service.EmployeeServiceImpl;
 
 import java.util.Collection;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
-    private final EmployeeService employeeService;
+    private final EmployeeServiceImpl employeeService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeServiceImpl employeeService) {
         this.employeeService = employeeService;
     }
 
     @GetMapping("/add")
     public Employee add(@RequestParam(value = "firstName", required = false) String firstName,
-                        @RequestParam(value = "lastName", required = false) String lastName) {
-        return employeeService.addEmployee(firstName, lastName);
+                        @RequestParam(value = "lastName", required = false) String lastName,
+                        @RequestParam(value = "id") int department,
+                        @RequestParam(value = "salary") int salary) {
+        return employeeService.addEmployee(firstName, lastName, department, salary);
     }
 
     @GetMapping("/find")
@@ -37,7 +39,7 @@ public class EmployeeController {
     }
 
     @GetMapping()
-    public Collection<Employee> printAll() {
+    public Collection<Employee> findAll() {
         return employeeService.printAllEmployee();
     }
 }
