@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.groupingBy;
 
 @Service
-public class DepartmentServiceImpl  {
+public class DepartmentServiceImpl {
     private final EmployeeServiceImpl employeeService;
 
     public DepartmentServiceImpl(EmployeeServiceImpl employeeService) {
@@ -35,21 +35,22 @@ public class DepartmentServiceImpl  {
     }
 
 
-    public Employee findEmployeeWithMaxSalary(int department) {
+    public Integer findEmployeeWithMaxSalary(int department) {
         return employeeService.takeOutAllEmployee().stream()
                 .filter(e -> e.getDepartment() == department)
                 .max(Comparator.comparingInt(Employee::getSalary))
+                .map(Employee::getSalary)
                 .orElseThrow(EmployeeNotFoundException::new);
     }
 
 
-    public Employee findEmployeeWithMinSalary(int department) {
+    public Integer findEmployeeWithMinSalary(int department) {
         return employeeService.takeOutAllEmployee().stream()
                 .filter(e -> e.getDepartment() == department)
                 .min(Comparator.comparingInt(Employee::getSalary))
+                .map(Employee::getSalary)
                 .orElseThrow(EmployeeNotFoundException::new);
     }
-
 
 
     public Map<Integer, List<Employee>> findEmployeeForAllDepartments() {
