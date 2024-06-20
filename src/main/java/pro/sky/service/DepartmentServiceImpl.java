@@ -21,14 +21,14 @@ public class DepartmentServiceImpl  {
 
 
     public List<Employee> findEmployeesByDepartment(int department) {
-        return employeeService.printAllEmployee().stream()
+        return employeeService.takeOutAllEmployee().stream()
                 .filter(e -> e.getDepartment() == department)
                 .collect(Collectors.toList());
     }
 
 
     public Integer calculationFindEmployeeWithSumSalary(int department) {
-        return employeeService.printAllEmployee().stream()
+        return employeeService.takeOutAllEmployee().stream()
                 .filter(employee -> employee.getDepartment() == department)
                 .mapToInt(Employee::getSalary)
                 .sum();
@@ -36,7 +36,7 @@ public class DepartmentServiceImpl  {
 
 
     public Employee findEmployeeWithMaxSalary(int department) {
-        return employeeService.printAllEmployee().stream()
+        return employeeService.takeOutAllEmployee().stream()
                 .filter(e -> e.getDepartment() == department)
                 .max(Comparator.comparingInt(Employee::getSalary))
                 .orElseThrow(EmployeeNotFoundException::new);
@@ -44,7 +44,7 @@ public class DepartmentServiceImpl  {
 
 
     public Employee findEmployeeWithMinSalary(int department) {
-        return employeeService.printAllEmployee().stream()
+        return employeeService.takeOutAllEmployee().stream()
                 .filter(e -> e.getDepartment() == department)
                 .min(Comparator.comparingInt(Employee::getSalary))
                 .orElseThrow(EmployeeNotFoundException::new);
@@ -53,7 +53,7 @@ public class DepartmentServiceImpl  {
 
 
     public Map<Integer, List<Employee>> findEmployeeForAllDepartments() {
-        return employeeService.printAllEmployee().stream()
+        return employeeService.takeOutAllEmployee().stream()
                 .collect(groupingBy(Employee::getDepartment));
     }
 }

@@ -34,7 +34,7 @@ public class DepartmentServiceTest {
 
     @BeforeEach
     void beforeEach() {
-        when(employeeService.printAllEmployee()).thenReturn(employees);
+        when(employeeService.takeOutAllEmployee()).thenReturn(employees);
     }
 
     @Test

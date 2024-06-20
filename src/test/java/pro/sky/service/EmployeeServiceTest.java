@@ -10,7 +10,6 @@ import pro.sky.exception.InvalidInputException;
 import pro.sky.model.Employee;
 
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -36,7 +35,7 @@ class EmployeeServiceTest {
 
     @AfterEach
     public void afterEach() {
-        employeeService.printAllEmployee()
+        employeeService.takeOutAllEmployee()
                 .forEach(employee -> employeeService.removeEmployee(employee.getFirstName(), employee.getLastName()));
     }
 
@@ -49,7 +48,7 @@ class EmployeeServiceTest {
 
         assertThat(actual).isEqualTo(expected);
         assertThat(actual).isEqualTo(employeeService.findEmployee("Сон", "Ган"));
-        assertThat(actual).isIn(employeeService.printAllEmployee());
+        assertThat(actual).isIn(employeeService.takeOutAllEmployee());
 
     }
 
@@ -71,7 +70,7 @@ class EmployeeServiceTest {
     @Test
     void findEmployee() {
         Employee expected = new Employee("Вин", "Дизель", 1, 150_000);
-        assertThat(employeeService.printAllEmployee()).contains(expected);
+        assertThat(employeeService.takeOutAllEmployee()).contains(expected);
 
         Employee actual = employeeService.findEmployee("Вин", "Дизель");
         assertThat(actual).isEqualTo(expected);
@@ -87,13 +86,13 @@ class EmployeeServiceTest {
     @Test
     void removeEmployee() {
         Employee expected = new Employee("Вин", "Дизель", 1, 150_000);
-        assertThat(employeeService.printAllEmployee()).contains(expected);
+        assertThat(employeeService.takeOutAllEmployee()).contains(expected);
 
         Employee actual = employeeService.removeEmployee("Вин", "Дизель");
         assertThat(actual).isEqualTo(expected);
         assertThatExceptionOfType(EmployeeNotFoundException.class)
                 .isThrownBy(() -> employeeService.findEmployee("Вин", "Дизель"));
-        assertThat(actual).isNotIn(employeeService.printAllEmployee());
+        assertThat(actual).isNotIn(employeeService.takeOutAllEmployee());
 
     }
 
@@ -106,7 +105,7 @@ class EmployeeServiceTest {
 
     @Test
     void getAllEmployeesTest() {
-       assertThat(employeeService.printAllEmployee())
+       assertThat(employeeService.takeOutAllEmployee())
                .containsExactlyInAnyOrderElementsOf(employees);
     }
 

@@ -68,7 +68,7 @@ public class EmployeeServiceImpl {
         return employees.get(key);
     }
 
-    public Collection<Employee> printAllEmployee() {
+    public Collection<Employee> takeOutAllEmployee() {
         return new ArrayList<>(employees.values());
     }
 
